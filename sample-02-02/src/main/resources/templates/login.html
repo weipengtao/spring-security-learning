@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+        }
+
+        .login-container {
+            width: 350px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #45a049;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h2>用户登录</h2>
+    <!-- 登录失败提示 -->
+    <div th:if="${param.error}" class="error">用户名或密码错误</div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="input-field">
+            <input type="text" name="username" placeholder="用户名" required/>
+        </div>
+        <div class="input-field">
+            <input type="password" name="password" placeholder="密码" required/>
+        </div>
+        <button type="submit" class="login-btn">登录</button>
+    </form>
+</div>
+</body>
+</html>
