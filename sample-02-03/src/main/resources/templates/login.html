@@ -36,6 +36,19 @@
             border: 1px solid #ccc;
         }
 
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .captcha-img {
+            height: 40px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         .login-btn {
             width: 100%;
             padding: 10px;
@@ -61,7 +74,7 @@
 <div class="login-container">
     <h2>用户登录</h2>
     <!-- 登录失败提示 -->
-    <div th:if="${param.error}" class="error">用户名或密码错误</div>
+    <div th:if="${param.error}" class="error">用户名或密码错误或验证码错误</div>
 
     <form th:action="@{/doLogin}" method="post">
         <div class="input-field">
@@ -70,8 +83,23 @@
         <div class="input-field">
             <input type="password" name="password" placeholder="密码" required/>
         </div>
+
+        <!-- 验证码输入 -->
+        <div class="input-field captcha-container">
+            <input type="text" name="captcha" placeholder="验证码" required/>
+            <img id="captchaImg" class="captcha-img" th:src="@{/captcha}" alt="验证码"
+                 title="点击刷新验证码" onclick="refreshCaptcha()"/>
+        </div>
+
         <button type="submit" class="login-btn">登录</button>
     </form>
 </div>
+
+<script>
+    // 刷新验证码
+    function refreshCaptcha() {
+        document.getElementById("captchaImg").src = "/captcha?time=" + new Date().getTime();
+    }
+</script>
 </body>
 </html>
